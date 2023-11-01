@@ -1,3 +1,4 @@
+import { Priority } from "../constants/priority";
 import { BoardTicket } from "../types/boardticket";
 import { Ticket } from "../types/ticket";
 import { User } from "../types/user";
@@ -11,6 +12,7 @@ export const boardTicketParser = (
     const user = users.find((user) => user.id === ticket.userId);
     return {
       ...ticket,
+      priority: Priority[ticket.priority.toString() as keyof typeof Priority],
       username: user?.name || "",
       userAvailable: user?.available || false,
     };
@@ -21,7 +23,6 @@ export const boardTicketParser = (
     if (!groups[key]) {
       groups[key] = [];
     }
-
     groups[key].push(ticket);
     return groups;
   }, {} as Record<string, BoardTicket[]>);

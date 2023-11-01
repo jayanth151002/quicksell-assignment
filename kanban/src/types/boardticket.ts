@@ -1,6 +1,7 @@
 import { Ticket } from "./ticket";
 
-export interface BoardTicket extends Ticket {
+export type BoardTicket = Omit<Ticket, "priority"> & {
+  priority: string;
   username: string;
   userAvailable: boolean;
-}
+};

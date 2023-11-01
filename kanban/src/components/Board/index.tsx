@@ -1,4 +1,3 @@
-import { BoardTicket } from "../../types/boardticket";
 import { Ticket } from "../../types/ticket";
 import { User } from "../../types/user";
 import { boardTicketParser } from "../../utils/boardTicketParser";
@@ -15,17 +14,20 @@ const Board = ({ tickets, users, groupBy }: BoardProps) => {
   const groupedTickets = boardTicketParser(tickets, users, groupBy);
 
   return (
-    <div>
+    <div className="grid-parent">
       {Object.keys(groupedTickets).map((key) => (
-        <div key={key}>
-          <h2>{key}</h2>
-          <ul>
-            {groupedTickets[key].map((ticket) => (
-              <span key={ticket.id}>
-                <Card />
-              </span>
-            ))}
-          </ul>
+        <div key={key} className="column-main">
+          <div className="column-name">{key}</div>
+          {groupedTickets[key].map((ticket) => (
+            <span key={ticket.id}>
+              <Card
+                id={ticket.id}
+                avatar={ticket.username[0]}
+                title={ticket.title}
+                tag={ticket.tag[0]}
+              />
+            </span>
+          ))}
         </div>
       ))}
     </div>
