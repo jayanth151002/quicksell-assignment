@@ -39,6 +39,7 @@ const Dropdown = ({
                 onChange={() => {
                   localStorage.setItem("groupBy", groupByEnum.priority);
                   setGroupBy(groupByEnum.priority);
+                  setIsMenuOpen(!isMenuOpen);
                 }}
               />
               Priority
@@ -53,6 +54,7 @@ const Dropdown = ({
                 onChange={() => {
                   localStorage.setItem("groupBy", groupByEnum.user);
                   setGroupBy(groupByEnum.user);
+                  setIsMenuOpen(!isMenuOpen);
                 }}
               />
               User
@@ -67,6 +69,7 @@ const Dropdown = ({
                 onChange={() => {
                   localStorage.setItem("groupBy", groupByEnum.status);
                   setGroupBy(groupByEnum.status);
+                  setIsMenuOpen(!isMenuOpen);
                 }}
               />
               Status
@@ -81,10 +84,9 @@ const Dropdown = ({
                 value={sortByEnum.priority}
                 checked={sortBy === sortByEnum.priority}
                 onChange={() => {
-                  if (groupBy !== groupByEnum.priority) {
-                    localStorage.setItem("sortBy", sortByEnum.priority);
-                    setSortBy(sortByEnum.priority);
-                  }
+                  localStorage.setItem("sortBy", sortByEnum.priority);
+                  setSortBy(sortByEnum.priority);
+                  setIsMenuOpen(!isMenuOpen);
                 }}
               />
               Priority
@@ -99,6 +101,7 @@ const Dropdown = ({
                 onChange={() => {
                   localStorage.setItem("sortBy", sortByEnum.title);
                   setSortBy(sortByEnum.title);
+                  setIsMenuOpen(!isMenuOpen);
                 }}
               />
               Title

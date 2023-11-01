@@ -18,18 +18,7 @@ export const boardTicketParser = (
       userAvailable: user?.available || false,
     };
   });
-  boardTickets.sort((a, b) => {
-    if (sortBy === "priority") {
-      const priorityA = a.priority;
-      const priorityB = b.priority;
-      return priorityB.localeCompare(priorityA);
-    } else if (sortBy === "title") {
-      const titleA = a.title;
-      const titleB = b.title;
-      return titleA.localeCompare(titleB);
-    }
-    return 0;
-  });
+
   const groupedTickets = boardTickets.reduce((groups, ticket) => {
     const key = ticket[groupBy];
 
@@ -39,5 +28,20 @@ export const boardTicketParser = (
     groups[key].push(ticket);
     return groups;
   }, {} as Record<string, BoardTicket[]>);
+
+  Object.values(groupedTickets).forEach((group) => {
+    group.sort((a, b) => {
+      if (sortBy === "priority") {
+        const priorityA = a.priority;
+        const priorityB = b.priority;
+        return priorityB.localeCompare(priorityA);
+      } else if (sortBy === "title") {
+        const titleA = a.title;
+        const titleB = b.title;
+        return titleA.localeCompare(titleB);
+      }
+      return 0;
+    });
+  });
   return groupedTickets;
 };
