@@ -6,7 +6,8 @@ import { User } from "../types/user";
 export const boardTicketParser = (
   tickets: Ticket[],
   users: User[],
-  groupBy: "priority" | "username" | "status"
+  groupBy: "priority" | "username" | "status",
+  sortBy: "priority" | "title" | ""
 ) => {
   const boardTickets = tickets.map((ticket) => {
     const user = users.find((user) => user.id === ticket.userId);
@@ -16,6 +17,18 @@ export const boardTicketParser = (
       username: user?.name || "",
       userAvailable: user?.available || false,
     };
+  });
+  boardTickets.sort((a, b) => {
+    if (sortBy === "priority") {
+      const priorityA = a.priority;
+      const priorityB = b.priority;
+      return priorityB.localeCompare(priorityA);
+    } else if (sortBy === "title") {
+      const titleA = a.title;
+      const titleB = b.title;
+      return titleA.localeCompare(titleB);
+    }
+    return 0;
   });
   const groupedTickets = boardTickets.reduce((groups, ticket) => {
     const key = ticket[groupBy];

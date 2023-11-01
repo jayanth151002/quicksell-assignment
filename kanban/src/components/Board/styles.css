@@ -1,7 +1,8 @@
 .grid-parent {
-  display: flex;
-  flex-direction: row;
-  justify-content: space-evenly;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(100px, 1fr));
+  gap: 10px;
+  justify-items: center;
 }
 
 .column-name {

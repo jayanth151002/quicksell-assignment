@@ -8,10 +8,11 @@ interface BoardProps {
   tickets: Ticket[];
   users: User[];
   groupBy: "priority" | "username" | "status";
+  sortBy: "priority" | "title" | "";
 }
 
-const Board = ({ tickets, users, groupBy }: BoardProps) => {
-  const groupedTickets = boardTicketParser(tickets, users, groupBy);
+const Board = ({ tickets, users, groupBy, sortBy }: BoardProps) => {
+  const groupedTickets = boardTicketParser(tickets, users, groupBy, sortBy);
 
   return (
     <div className="grid-parent">

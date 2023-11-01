@@ -7,7 +7,11 @@ const Button = ({
   handleClick: () => void;
   text: string;
 }) => {
-  return <button onClick={handleClick}>{text}</button>;
+  return (
+    <button onClick={handleClick} className="button">
+      {text}
+    </button>
+  );
 };
 
 export default Button;

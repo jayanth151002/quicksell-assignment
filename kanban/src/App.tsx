@@ -6,11 +6,18 @@ import { User } from "./types/user";
 import Dropdown from "./components/Dropdown";
 import Board from "./components/Board";
 import { groupByEnum } from "./constants/groupBy";
+import { sortByEnum } from "./constants/sortBy";
+import Topbar from "./components/Topbar";
 
 const App = () => {
   const [tickets, setTickets] = useState<Ticket[]>([]);
   const [users, setUsers] = useState<User[]>([]);
-  const [groupBy, setGroupBy] = useState<groupByEnum>(groupByEnum.priority);
+  const [groupBy, setGroupBy] = useState<groupByEnum>(
+    (localStorage.getItem("groupBy") ?? groupByEnum.priority) as groupByEnum
+  );
+  const [sortBy, setSortBy] = useState<sortByEnum>(
+    (localStorage.getItem("sortBy") ?? sortByEnum.none) as sortByEnum
+  );
 
   useEffect(() => {
     callApi()
@@ -26,9 +33,19 @@ const App = () => {
   }, []);
   return (
     <div className="App">
-      <h1>Kanban</h1>
-      <Dropdown setGroupBy={setGroupBy} />
-      <Board tickets={tickets} users={users} groupBy={groupBy} />
+      <Topbar />
+      <Dropdown
+        groupBy={groupBy}
+        setGroupBy={setGroupBy}
+        sortBy={sortBy}
+        setSortBy={setSortBy}
+      />
+      <Board
+        tickets={tickets}
+        users={users}
+        groupBy={groupBy}
+        sortBy={sortBy}
+      />
     </div>
   );
 };

@@ -1,0 +1,12 @@
+.topbar-heading {
+  font-size: 2rem;
+  font-weight: 700;
+}
+
+.topbar-box {
+  height: 70px;
+  padding-left: 20px;
+  display: flex;
+  align-items: center;
+  border-bottom: 2px solid black;
+}
